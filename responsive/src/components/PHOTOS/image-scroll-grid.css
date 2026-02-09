@@ -1,0 +1,130 @@
+/* ⚠️ Scroll-ийг хаах юм бичээгүй эсэхээ шалга:
+   App / Body дээр overflow:hidden БҮҮ өг (ялангуяа ImageScrollGrid-г wrapper h-screen/overflow-hidden дотор битгий хий)
+*/
+
+.page {
+    min-height: 420vh;
+
+}
+
+.stuck-grid {
+    height: 180svh;
+    position: sticky;
+    top: 0;
+
+    perspective: 1500px;
+    transform-style: preserve-3d;
+
+    display: grid;
+    grid-template-columns: repeat(4, 25dvw);
+    grid-template-rows: repeat(4, 25dvh);
+    place-items: center;
+
+    overflow: clip;
+}
+
+.grid-item {
+    transform-style: preserve-3d;
+    transform: translateZ(var(--z, -1200px));
+    opacity: var(--op, 0);
+    will-change: transform, opacity;
+}
+
+.grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    box-shadow: 10px 30px 90px rgba(255, 255, 255, 0.55);
+    display: block;
+}
+
+.scroll-title {
+    position: absolute;
+    top: 650px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+
+    font-size: clamp(22px, 4vmin, 54px);
+    font-weight: 800;
+    letter-spacing: 0.22em;
+
+    background: linear-gradient(180deg, #fff2b0 0%, #ffffff 45%, #ffffff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+    pointer-events: none;
+}
+
+.curved-wrap {
+    position: absolute;
+    top: 100px;
+    /* хүссэнээрээ */
+    left: 0;
+    width: 100%;
+    z-index: 60;
+    pointer-events: auto;
+    /* interactive drag ажиллуулах */
+    padding: 0 24px;
+}
+
+.curved-text {
+    fill: #ffffff;
+    opacity: 0.9;
+    filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.55));
+}
+
+@media (max-width: 640px) {
+    .page {
+        /* ✅ mobile дээр хэт урт биш */
+        min-height: 320vh;
+    }
+
+    .stuck-grid {
+        /* ✅ mobile дээр sticky бүс бага */
+        height: 145svh;
+
+        /* ✅ 4 биш 2 багана */
+        grid-template-columns: repeat(2, 50vw);
+        grid-template-rows: repeat(4, 22svh);
+    }
+
+    .grid-item {
+        /* ✅ item томруулна */
+        width: 100%;
+        height: 100%;
+        max-width: 300px;
+        max-height: 220px;
+    }
+
+    .scroll-title {
+        letter-spacing: 0.18em;
+        top: clamp(120px, 45svh, 420px);
+    }
+
+    .curved-wrap {
+        padding: 0 12px;
+    }
+}
+
+/* ✅ Tablet */
+@media (min-width: 641px) and (max-width: 1023px) {
+    .page {
+        min-height: 360vh;
+    }
+
+    .stuck-grid {
+        height: 160svh;
+        grid-template-columns: repeat(3, 33.33vw);
+        grid-template-rows: repeat(4, 30vh);
+    }
+
+    .grid-item {
+        width: 100%;
+        height: 100%;
+        max-width: 340px;
+        max-height: 300px;
+    }
+}

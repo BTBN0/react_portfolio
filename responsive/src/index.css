@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+html,
+body,
+#root {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+@keyframes logoIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.8) rotate(-8deg);
+        filter: blur(6px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(4px) scale(1.05) rotate(2deg);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0);
+    }
+}
+
+.animate-logo-in {
+    animation: logoIn 0.9s ease-out forwards;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-marquee {
+    animation: marquee 3s linear infinite;
+}
+
+#about,
+#photos,
+#skills,
+#contact {
+    scroll-margin-top: 90px;
+}
