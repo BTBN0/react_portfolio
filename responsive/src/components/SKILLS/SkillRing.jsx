@@ -23,7 +23,7 @@ export default function SkillRing({ label, value }) {
             cx={size / 2}
             cy={size / 2}
             r={r}
-            stroke="#ef4444"
+            stroke="#a5a5a5"
             strokeWidth={stroke}
             fill="none"
             strokeLinecap="round"

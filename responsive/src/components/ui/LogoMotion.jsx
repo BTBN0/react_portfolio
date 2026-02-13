@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import logo from "../../../public/images/logo.jpg";
 
 export default function LogoMotion() {
     return (
         <Link to="/" className="pointer-events-auto">
             <motion.img
-                src="/public/images/logo.png"
+                src={logo}
                 alt="Logo"
                 className="cursor-target object-contain cursor-pointer 
                 w-16 h-10

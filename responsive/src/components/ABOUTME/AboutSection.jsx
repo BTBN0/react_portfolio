@@ -6,16 +6,16 @@ export default function AboutSection() {
     const navigate = useNavigate();
 
     return (
-        <section id="about" className="bg-black text-white">
+        <section id="about" className="bg-black text-white w-full h-screen relative overflow-hidden flex items-center justify-center">
             <div
                 className="
-          mx-auto w-full max-w-6xl
-          px-4 sm:px-6 lg:px-8
-          py-14 sm:py-20 grid grid-cols-1 md:grid-cols-2 gap-16 items-center
+           w-full m-0
+          px-4 sm:px-8 lg:px-12
+          py-14 sm:py-20 grid grid-cols-1 md:grid-cols-2 gap-20 items-center
         "
             >
                 {/* ✅ TEXT UNDER IMAGE */}
-                <div className="mt-10 sm:mt-12 text-center sm:text-left">
+                <div className="mt-10 sm:mt-12 text-center sm:text-left mx-10 sm:mx-23">
                     <ScrollFloat
                         animationDuration={1}
                         ease="back.inOut(2)"
@@ -42,6 +42,7 @@ export default function AboutSection() {
                 px-6 py-3
                 text-sm font-semibold text-black
                 transition hover:scale-105
+                sm:text-[20px]
               "
                         >
                             Discover More About Me
@@ -51,8 +52,8 @@ export default function AboutSection() {
                 {/* ✅ TOP IMAGE */}
                 <div className="flex justify-center">
                     <div
-                        className="
-              w-full max-w-[520px]
+                        className="cursor-target
+              w-full max-w-[420px]
               h-[360px]
               sm:h-[420px]
               lg:h-[480px]

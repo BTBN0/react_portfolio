@@ -1,7 +1,7 @@
 export default function ContactSection() {
     return (
         <section id="contact" className="bg-black text-white">
-            <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+            <div className=" mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 py-16 sm:py-10">
                 {/* TOP */}
                 <div className="cursor-target text-center">
                     <p className="text-sm tracking-[0.22em] text-white/70">
@@ -26,9 +26,9 @@ export default function ContactSection() {
                     {/* LEFT LOGO */}
                     <div className="cursor-target flex items-center justify-center md:justify-start">
                         <img
-                            src="/images/logo.png"
+                            src="/images/logo.jpg"
                             alt="logo"
-                            className="h-16 w-32 sm:h-20 sm:w-40 object-contain opacity-90"
+                            className="h-16 w-32 sm:h-20 sm:w-40 object-contain opacity-90 sm:mx-30"
                             draggable={false}
                         />
                     </div>
@@ -41,7 +41,7 @@ export default function ContactSection() {
                     </div>
 
                     {/* RIGHT PHONE + SOCIAL */}
-                    <div className="cursor-target flex flex-col items-center md:items-end gap-4">
+                    <div className="cursor-target flex flex-col items-center md:items-end gap-4 sm:mx-30">
                         <a
                             href="tel:+97689718862"
                             className="cursor-target text-lg sm:text-xl font-semibold tracking-wide hover:opacity-80 transition"

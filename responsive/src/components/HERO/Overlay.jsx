@@ -93,30 +93,31 @@ export default function Overlay() {
                 className="
     hidden lg:flex
     pointer-events-auto
-    fixed right-6 top-1/2 -translate-y-1/2 z-50
+    fixed right-6 top-1/2 -translate-y-1/2 z-50 
   "
             >
                 <div
                     className="
-      rounded-3xl border border-white/15
+       border border-white/30 shadow-[0_0_25px_rgba(255,255,255,0.4)]
       bg-black/40 backdrop-blur
       px-4 py-4
-      flex flex-col items-center gap-8
-      shadow-[0_0_25px_rgba(255,255,255,0.08)]
+      flex flex-col items-center gap-8 
     "
                 >
                     {menu.map((item) => (
                         <button
                             key={item.label}
                             onClick={() => handleMenuClick(item)}
-                            className="
+                            className="text-[16px]
           cursor-target select-none
           opacity-70 hover:opacity-100
           transition hover:scale-110
           [writing-mode:vertical-rl] rotate-0
-          tracking-widest text-sm
+          tracking-widest
         "
                         >
+
+
                             {item.label}
                         </button>
                     ))}
@@ -204,7 +205,7 @@ export default function Overlay() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label="GitHub"
-                >
+                >das sadas
                     <i className="fa-brands fa-github" />
                 </a>
             </div>

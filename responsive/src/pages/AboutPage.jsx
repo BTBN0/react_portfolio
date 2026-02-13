@@ -122,7 +122,7 @@ export default function AboutPage() {
           {/* LEFT LOGO */}
           <div className="cursor-target flex items-center justify-center md:justify-start">
             <img
-              src="/images/logo.png"
+              src="/images/logo.jpg"
               alt="logo"
               className="h-16 w-32 sm:h-20 sm:w-40 object-contain opacity-90"
               draggable={false}

@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect, useState } from "react";
+import { useRef, useLayoutEffect, useEffect, useState } from "react";
 import {
     motion,
     useScroll,
@@ -38,6 +38,8 @@ function VelocityRow({
     stiffness = 400,
     velocityMapping = { input: [0, 1000], output: [0, 4] },
     className = "",
+    copies = 6, // ✅ олон copy -> тасралтгүй
+    startFromCenter = true, // ✅ center эхлэл
 }) {
     const baseX = useMotionValue(0);
 
@@ -58,6 +60,18 @@ function VelocityRow({
     const copyRef = useRef(null);
     const w = useElementWidth(copyRef);
 
+    // ✅ center-ээс эхлүүлэх: нэг удаа baseX-г -w/2 болгож өгнө
+    const didInit = useRef(false);
+    useEffect(() => {
+        if (!w) return;
+        if (!startFromCenter) return;
+        if (didInit.current) return;
+
+        baseX.set(-w / 2);
+        didInit.current = true;
+    }, [w, startFromCenter, baseX]);
+
+    // ✅ translateX-г wrap хийж тасралтгүй болгоно
     const x = useTransform(baseX, (val) => {
         if (!w) return "0px";
         return `${wrap(-w, 0, val)}px`;
@@ -79,15 +93,24 @@ function VelocityRow({
     return (
         <div className="relative overflow-hidden">
             <motion.div
-                className={`flex items-center gap-12 whitespace-nowrap ${className}`}
+                className={`flex items-center whitespace-nowrap ${className}`}
                 style={{ x }}
             >
-                <div ref={copyRef} className="flex items-center gap-12 shrink-0">
+                {/* ✅ эхний copy (өргөнийг хэмжих) */}
+                <div ref={copyRef} className="flex items-center gap-10 shrink-0">
                     {children}
                 </div>
-                <div className="flex items-center gap-12 shrink-0" aria-hidden="true">
-                    {children}
-                </div>
+
+                {/* ✅ нэмэлт copies */}
+                {Array.from({ length: Math.max(1, copies - 1) }).map((_, idx) => (
+                    <div
+                        key={idx}
+                        className="flex items-center gap-10 shrink-0"
+                        aria-hidden="true"
+                    >
+                        {children}
+                    </div>
+                ))}
             </motion.div>
         </div>
     );
@@ -98,7 +121,7 @@ export default function LogoVelocityMarquee({
     velocity = 120,
     logoSizeClass = "h-12",
 }) {
-    // ✅ public/logos/ доторх файлууд
+    // ⚠️ public/logos/ доторх файлууд (нэр нь яг таарч байх ёстой, case-sensitive)
     const logos = [
         "/logos/HTML.png",
         "/logos/CSS.png",
@@ -109,14 +132,17 @@ export default function LogoVelocityMarquee({
         "/logos/UIUX.png",
     ];
 
-
     const row = logos.map((src, i) => (
         <img
             key={i}
             src={src}
             alt="logo"
-            className={`${logoSizeClass} w-auto opacity-70 hover:opacity-100 transition`}
             draggable={false}
+            className={`
+        ${logoSizeClass} w-auto
+        opacity-100
+        transition
+      `}
         />
     ));
 
@@ -127,6 +153,8 @@ export default function LogoVelocityMarquee({
                 scrollContainerRef={scrollContainerRef}
                 baseVelocity={velocity}
                 className="py-2"
+                copies={7}
+                startFromCenter
             >
                 {row}
             </VelocityRow>
@@ -137,6 +165,8 @@ export default function LogoVelocityMarquee({
                     scrollContainerRef={scrollContainerRef}
                     baseVelocity={-velocity}
                     className="py-2"
+                    copies={7}
+                    startFromCenter
                 >
                     {row}
                 </VelocityRow>

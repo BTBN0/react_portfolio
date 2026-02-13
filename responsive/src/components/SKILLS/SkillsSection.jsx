@@ -5,12 +5,12 @@ import LogoVelocityMarquee from "../ui/LogoVelocityMarquee";
 
 const skills = [
   { label: "PYTHON", value: 70 },
-  { label: "HTML5", value: 95 },
-  { label: "CSS3", value: 85 },
+  { label: "HTML5", value: 60 },
+  { label: "CSS3", value: 70 },
   { label: "Java Script", value: 40 },
   { label: "SQL", value: 50 },
   { label: "ReactJS", value: 60 },
-  { label: "UI/UX", value: 90 },
+  { label: "UI/UX", value: 60 },
 ];
 
 export default function SkillsSection() {
@@ -19,12 +19,13 @@ export default function SkillsSection() {
       id="skills"
       className="
         bg-black text-white
-        min-h-screen
-        -mt-24 lg:-mt-[220px]
+        w-full 
+        -mt-20 lg:-mt-[220px]
+        flex justify-center
       "
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-10 pb-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
+      <div className="w-full h-full px-4 sm:px-6 lg:px-8 pt-10 pb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-16 items-start">
           {/* LEFT */}
           <div>
             <ScrollReveal
@@ -35,9 +36,9 @@ export default function SkillsSection() {
               containerClassName="
                 cursor-target mb-6 relative overflow-hidden
                 w-max
-                md:ml-20
+                md:ml-30
               "
-              textClassName="text-3xl sm:text-4xl font-bold tracking-wide"
+              textClassName="text-3xl sm:text-5xl font-bold tracking-wide"
             >
               SKILLS
             </ScrollReveal>
@@ -50,18 +51,18 @@ export default function SkillsSection() {
               containerClassName="
                 cursor-target mb-10 sm:mb-14
                 max-w-[320px]
-                md:ml-20
+                md:ml-35
               "
-              textClassName="text-white/80 text-sm sm:text-[15px] leading-relaxed"
+              textClassName="text-white/80 text-sm sm:text-[20px] leading-relaxed"
             >
               Skills are not about how much you know, but how well you apply what
               you know.
             </ScrollReveal>
 
             {/* RINGS */}
-            <div className="mt-10 md:mt-12">
+            <div className="mt-10 md:mt-12 md:ml-40">
               {/* top 4 */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-8">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-8 sm:max-w-[1080px]">
                 {skills.slice(0, 4).map((s) => (
                   <SkillRing
                     key={s.label}
@@ -73,7 +74,7 @@ export default function SkillsSection() {
               </div>
 
               {/* bottom 3 */}
-              <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-8 sm:max-w-[340px]">
+              <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 gap-x-10 gap-y-8 sm:max-w-[640px]">
                 {skills.slice(4, 7).map((s) => (
                   <SkillRing
                     key={s.label}
@@ -87,12 +88,14 @@ export default function SkillsSection() {
           </div>
 
           {/* RIGHT IMAGE */}
-          <div className="cursor-target flex justify-center md:justify-end relative z-10 md:mr-20 md:translate-x-10">
+          <div className="w-full flex justify-center md:justify-end relative z-10 md:translate-x-10">
             <div
               className="
+              cursor-target 
                 w-[280px] h-[340px]
                 sm:w-[320px] sm:h-[380px]
-                lg:w-[360px] lg:h-[420px]
+                lg:w-[410px] lg:h-[470px]
+                md:mr-40
               "
             >
               <GlareHover
@@ -121,7 +124,7 @@ export default function SkillsSection() {
         </div>
 
         {/* BOTTOM MARQUEE */}
-        <div className="mt-12">
+        <div className="my-12 mb-10">
           <LogoVelocityMarquee
             velocity={70}
             numCopies={8}
