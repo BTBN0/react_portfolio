@@ -205,7 +205,7 @@ export default function Overlay() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label="GitHub"
-                >das sadas
+                >
                     <i className="fa-brands fa-github" />
                 </a>
             </div>

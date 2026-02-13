@@ -1,10 +1,41 @@
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import LogoMotion from "../components/ui/LogoMotion";
+import emailjs from "@emailjs/browser";
 
 export default function ContactPage() {
+    const formRef = useRef(null);
+    const [status, setStatus] = useState({ type: "idle", msg: "" });
+    const [loading, setLoading] = useState(false);
+
+    const sendEmail = async (e) => {
+        e.preventDefault();
+        if (!formRef.current) return;
+
+        setLoading(true);
+        setStatus({ type: "idle", msg: "" });
+
+        try {
+            await emailjs.sendForm(
+                "0712",   // ✅ EmailJS Service ID
+                "template_zmdo9f2",  // ✅ EmailJS Template ID
+                formRef.current,
+                "oYVBE_KXA7fSY4ZTU"    // ✅ EmailJS Public Key
+            );
+
+            setStatus({ type: "success", msg: "Sent " });
+            formRef.current.reset();
+        } catch (err) {
+            console.log(err);
+            setStatus({ type: "error", msg: "Failed to send. Try again." });
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <div className="min-h-screen bg-black text-white overflow-x-hidden">
-            {/* Logo (page дээр хэрэгтэй бол fixed байлга) */}
+            {/* Logo */}
             <div className="fixed top-4 left-4 sm:top-6 sm:left-8 z-50 pointer-events-auto">
                 <LogoMotion />
             </div>
@@ -13,7 +44,7 @@ export default function ContactPage() {
                 {/* BACK */}
                 <Link
                     to="/"
-                    className="cursor-target inline-flex items-center gap-2 text-sm text-white/60 hover:text-white transition relative z-10 left-250"
+                    className="cursor-target inline-flex items-center gap-2 text-sm text-white/60 hover:text-white transition"
                 >
                     <span>←</span>
                     <span>Back to Home</span>
@@ -38,17 +69,24 @@ export default function ContactPage() {
 
                     {/* RIGHT FORM */}
                     <form
+                        ref={formRef}
                         className="cursor-target pt-2 sm:pt-6"
-                        onSubmit={(e) => {
-                            e.preventDefault();
-                        }}
+                        onSubmit={sendEmail}
                     >
-                        <FormField label="NAME" />
-                        <FormField label="SUBJECT" className="mt-8" />
-                        <FormField label="MESSAGE" textarea className="mt-8" />
+                        {/* ✅ EmailJS template-д хэрэгтэй name атрибутууд */}
+                        <FormField label="NAME" name="from_name" required />
+                        <FormField label="SUBJECT" name="subject" className="mt-8" required />
+                        <FormField
+                            label="MESSAGE"
+                            name="message"
+                            textarea
+                            className="mt-8"
+                            required
+                        />
 
                         <button
                             type="submit"
+                            disabled={loading}
                             className="
                 cursor-target mt-10
                 inline-flex items-center justify-center
@@ -56,17 +94,27 @@ export default function ContactPage() {
                 px-10 py-3
                 text-sm font-semibold text-black
                 transition hover:scale-105 hover:opacity-90
+                disabled:opacity-60 disabled:cursor-not-allowed
               "
                         >
-                            SEND
+                            {loading ? "SENDING..." : "SEND"}
                         </button>
+
+                        {/* STATUS */}
+                        {status.type !== "idle" && (
+                            <div
+                                className={`mt-4 text-sm ${status.type === "success" ? "text-green-400" : "text-red-400"
+                                    }`}
+                            >
+                                {status.msg}
+                            </div>
+                        )}
                     </form>
                 </div>
             </div>
 
             {/* CONTACT BLOCK (reuse) */}
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pb-16">
-                {/* TOP */}
                 <div className="cursor-target text-center">
                     <p className="text-sm tracking-[0.22em] text-white/70">
                         Get in Touch With Us
@@ -80,9 +128,7 @@ export default function ContactPage() {
                     </a>
                 </div>
 
-                {/* MID */}
                 <div className="cursor-target mt-14 sm:mt-20 grid grid-cols-1 md:grid-cols-3 items-center gap-10">
-                    {/* LEFT LOGO */}
                     <div className="cursor-target flex items-center justify-center md:justify-start">
                         <img
                             src="/images/logo.jpg"
@@ -92,14 +138,12 @@ export default function ContactPage() {
                         />
                     </div>
 
-                    {/* CENTER ADDRESS */}
                     <div className="cursor-target text-center text-base sm:text-lg md:text-xl leading-6 text-white/80">
                         <div className="font-semibold text-white/90">Mongolia</div>
                         <div>Ulaanbaatar</div>
                         <div>ХУД 1-хороо</div>
                     </div>
 
-                    {/* RIGHT PHONE + SOCIAL */}
                     <div className="cursor-target flex flex-col items-center md:items-end gap-4">
                         <a
                             href="tel:+97689718862"
@@ -146,7 +190,7 @@ export default function ContactPage() {
                 </div>
             </div>
 
-            {/* RIGHT FIXED MENU (desktop only, bordered, no jump) */}
+            {/* RIGHT FIXED MENU */}
             <div className="hidden lg:block pointer-events-auto fixed right-6 top-1/2 -translate-y-1/2 z-50">
                 <div className="rounded-3xl border border-white/15 bg-black/40 backdrop-blur px-4 py-4 flex flex-col items-center gap-8">
                     {["ABOUT", "CONTACT"].map((item) => (
@@ -172,7 +216,13 @@ export default function ContactPage() {
 
 /* ---------- small input field component ---------- */
 
-function FormField({ label, textarea = false, className = "" }) {
+function FormField({
+    label,
+    name,
+    textarea = false,
+    className = "",
+    required = false,
+}) {
     return (
         <div className={className}>
             <label className="text-[11px] tracking-[0.22em] text-white/70">
@@ -181,7 +231,9 @@ function FormField({ label, textarea = false, className = "" }) {
 
             {textarea ? (
                 <textarea
+                    name={name}
                     rows={4}
+                    required={required}
                     className="
             mt-3 w-full bg-transparent text-white
             outline-none resize-none
@@ -190,7 +242,9 @@ function FormField({ label, textarea = false, className = "" }) {
                 />
             ) : (
                 <input
+                    name={name}
                     type="text"
+                    required={required}
                     className="
             mt-3 w-full bg-transparent text-white
             outline-none
