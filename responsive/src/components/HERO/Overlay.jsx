@@ -63,26 +63,26 @@ export default function Overlay() {
           flex flex-col items-end
         "
             >
-                <div className="w-[180px] h-[52px] sm:w-[220px] sm:h-[64px] lg:w-[260px] lg:h-[70px]">
+                <div className="w-[240px] h-[68px] sm:w-[300px] sm:h-[84px] lg:w-[360px] lg:h-[96px]">
                     <TextPressure
                         text="Batsuuri"
                         width
                         weight
                         italic
                         textColor="#ffffff"
-                        minFontSize={22}
+                        minFontSize={32}
                         className="tracking-wide"
                     />
                 </div>
 
-                <div className="w-[180px] h-[52px] sm:w-[220px] sm:h-[64px] lg:w-[260px] lg:h-[70px]">
+                <div className="w-[240px] h-[68px] sm:w-[300px] sm:h-[84px] lg:w-[360px] lg:h-[96px]">
                     <TextPressure
                         text="Batbaysgalan"
                         width
                         weight
                         italic
                         textColor="#ffffff"
-                        minFontSize={22}
+                        minFontSize={32}
                         className="tracking-wide"
                     />
                 </div>
