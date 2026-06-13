@@ -16,14 +16,17 @@ export default function ScrollBackground() {
       const p = Math.min(1, Math.max(0, window.scrollY / max));
 
       // Hue shifts across the scroll range, position drifts diagonally
-      const hue1 = 220 + p * 140; // blue -> purple/pink
-      const hue2 = 280 + p * 120;
-      const x = 20 + p * 60;
-      const y = 10 + p * 70;
+      const hue1 = 220 + p * 200; // blue -> purple -> pink -> orange
+      const hue2 = 280 + p * 180;
+      const hue3 = 180 + p * 160;
+      const x = 15 + p * 70;
+      const y = 5 + p * 80;
 
       el.style.background = `
-        radial-gradient(60% 50% at ${x}% ${y}%, hsla(${hue1}, 80%, 45%, 0.18), transparent 60%),
-        radial-gradient(50% 40% at ${100 - x}% ${100 - y}%, hsla(${hue2}, 80%, 50%, 0.14), transparent 60%)
+        radial-gradient(55% 45% at ${x}% ${y}%, hsla(${hue1}, 85%, 55%, 0.35), transparent 60%),
+        radial-gradient(50% 45% at ${100 - x}% ${100 - y}%, hsla(${hue2}, 85%, 55%, 0.3), transparent 60%),
+        radial-gradient(60% 50% at ${50 + (x - 50) * 0.5}% ${50 + (y - 50) * 0.5}%, hsla(${hue3}, 80%, 50%, 0.18), transparent 65%),
+        #000000
       `;
     };
 

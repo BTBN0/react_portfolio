@@ -6,7 +6,7 @@ export default function AboutSection() {
     const navigate = useNavigate();
 
     return (
-        <section id="about" className="bg-black/95 text-white w-full h-screen relative overflow-hidden flex items-center justify-center">
+        <section id="about" className="bg-black/80 text-white w-full h-screen relative overflow-hidden flex items-center justify-center">
             <div
                 className="
            w-full m-0

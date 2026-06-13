@@ -34,7 +34,7 @@ export default function ContactPage() {
     };
 
     return (
-        <div className="min-h-screen bg-black/95 text-white overflow-x-hidden">
+        <div className="min-h-screen bg-black/80 text-white overflow-x-hidden">
             {/* Logo */}
             <div className="fixed top-4 left-4 sm:top-6 sm:left-8 z-50 pointer-events-auto">
                 <LogoMotion />
