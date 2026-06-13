@@ -6,6 +6,7 @@ import AboutSection from "./components/ABOUTME/AboutSection";
 import LogoMotion from "./components/ui/LogoMotion";
 import ImageScrollGrid from "./components/PHOTOS/ImageScrollGrid";
 import TargetCursor from "./components/ui/TargetCursor";
+import ScrollBackground from "./components/ui/ScrollBackground";
 
 
 // 🆕 Desktop About page
@@ -17,7 +18,8 @@ export default function App() {
   const location = useLocation();
 
   return (
-    <div className="w-screen bg-black text-white">
+    <div className="w-screen bg-black text-white relative">
+      <ScrollBackground />
       <TargetCursor
         spinDuration={2}
         hideDefaultCursor
@@ -28,26 +30,28 @@ export default function App() {
       <div className="fixed top-6 right-8 z-50 pointer-events-auto">
         <LogoMotion />
       </div>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div key={`home-${location.pathname}`}>
-              <div className="h-screen relative">
-                {/* ✅ /about -> / болгоход key өөрчлөгдөнө */}
-                <Scene key={`scene-${location.pathname}`} />
-              </div>
+      <div className="relative z-10">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div key={`home-${location.pathname}`}>
+                <div className="h-screen relative">
+                  {/* ✅ /about -> / болгоход key өөрчлөгдөнө */}
+                  <Scene key={`scene-${location.pathname}`} />
+                </div>
 
-              <AboutSection />
-              <ImageScrollGrid />
-              <ContactSection />
-            </div>
-          }
-        />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/certifications" element={<CertificationsPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-      </Routes>
+                <AboutSection />
+                <ImageScrollGrid />
+                <ContactSection />
+              </div>
+            }
+          />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/certifications" element={<CertificationsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+      </div>
     </div>
   );
 }
