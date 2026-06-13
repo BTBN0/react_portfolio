@@ -193,10 +193,14 @@ export default function ContactPage() {
             {/* RIGHT FIXED MENU */}
             <div className="hidden lg:block pointer-events-auto fixed right-6 top-1/2 -translate-y-1/2 z-50">
                 <div className="rounded-3xl border border-white/15 bg-black/40 backdrop-blur px-4 py-4 flex flex-col items-center gap-8">
-                    {["ABOUT", "CONTACT"].map((item) => (
+                    {[
+                        { label: "ABOUT", to: "/about" },
+                        { label: "CERTIFICATIONS", to: "/certifications" },
+                        { label: "CONTACT", to: "/contact" },
+                    ].map((item) => (
                         <Link
-                            key={item}
-                            to={item === "ABOUT" ? "/about" : "/contact"}
+                            key={item.label}
+                            to={item.to}
                             className="
                 cursor-target select-none
                 opacity-70 hover:opacity-100
@@ -205,7 +209,7 @@ export default function ContactPage() {
                 tracking-widest text-sm
               "
                         >
-                            {item}
+                            {item.label}
                         </Link>
                     ))}
                 </div>

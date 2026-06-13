@@ -5,13 +5,13 @@ import Scene from "./components/HERO/Scene";
 import AboutSection from "./components/ABOUTME/AboutSection";
 import LogoMotion from "./components/ui/LogoMotion";
 import ImageScrollGrid from "./components/PHOTOS/ImageScrollGrid";
-import SkillsSection from "./components/SKILLS/SkillsSection";
 import TargetCursor from "./components/ui/TargetCursor";
 
 
 // 🆕 Desktop About page
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
+import CertificationsPage from "./pages/CertificationsPage";
 
 export default function App() {
   const location = useLocation();
@@ -40,12 +40,12 @@ export default function App() {
 
               <AboutSection />
               <ImageScrollGrid />
-              <SkillsSection />
               <ContactSection />
             </div>
           }
         />
-        <Route path="/about" element={<AboutPage />} />\
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/certifications" element={<CertificationsPage />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
     </div>
