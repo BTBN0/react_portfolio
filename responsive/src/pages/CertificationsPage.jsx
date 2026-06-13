@@ -9,8 +9,8 @@ export default function CertificationsPage() {
   const [previewImg, setPreviewImg] = useState(null);
 
   useEffect(() => {
-    listCertifications().then(setCerts);
-    listProjects().then(setProjects);
+    listCertifications().then(setCerts).catch((e) => console.error("certs error:", e));
+    listProjects().then(setProjects).catch((e) => console.error("projects error:", e));
   }, []);
 
   return (
