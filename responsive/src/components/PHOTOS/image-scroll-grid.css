@@ -3,7 +3,7 @@
 */
 
 .page {
-    min-height: 185vh;
+    min-height: 420vh;
 
 }
 
@@ -79,7 +79,7 @@
 @media (max-width: 640px) {
     .page {
         /* ✅ mobile дээр хэт урт биш */
-        min-height: 180vh;
+        min-height: 320vh;
     }
 
     .stuck-grid {
@@ -112,7 +112,7 @@
 /* ✅ Tablet */
 @media (min-width: 641px) and (max-width: 1023px) {
     .page {
-        min-height: 190vh;
+        min-height: 360vh;
     }
 
     .stuck-grid {
