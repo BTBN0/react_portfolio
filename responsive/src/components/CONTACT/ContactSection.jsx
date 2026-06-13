@@ -1,6 +1,6 @@
 export default function ContactSection() {
     return (
-        <section id="contact" className="bg-black/50 text-white">
+        <section id="contact" className="bg-black/60 text-white">
             <div className=" mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 py-16 sm:py-10">
                 {/* TOP */}
                 <div className="cursor-target text-center">
