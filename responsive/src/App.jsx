@@ -1,10 +1,10 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 
-import ContactSection from "./components/CONTACT/ContactSection";
-import Scene from "./components/HERO/Scene";
-import AboutSection from "./components/ABOUTME/AboutSection";
+import ContactSection from "./components/contact/ContactSection";
+import Scene from "./components/hero/Scene";
+import AboutSection from "./components/about/AboutSection";
 import LogoMotion from "./components/ui/LogoMotion";
-import ImageScrollGrid from "./components/PHOTOS/ImageScrollGrid";
+import ImageScrollGrid from "./components/photos/ImageScrollGrid";
 import TargetCursor from "./components/ui/TargetCursor";
 import ScrollBackground from "./components/ui/ScrollBackground";
 
@@ -13,6 +13,7 @@ import ScrollBackground from "./components/ui/ScrollBackground";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import CertificationsPage from "./pages/CertificationsPage";
+import AdminPage from "./pages/AdminPage";
 
 export default function App() {
   const location = useLocation();
@@ -50,6 +51,7 @@ export default function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/certifications" element={<CertificationsPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </div>
     </div>

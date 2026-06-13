@@ -34,7 +34,7 @@ export default function ContactPage() {
     };
 
     return (
-        <div className="min-h-screen bg-black/60 text-white overflow-x-hidden">
+        <div className="min-h-screen bg-black/60 text-white overflow-x-hidden pb-20 lg:pb-0">
             {/* Logo */}
             <div className="fixed top-4 left-4 sm:top-6 sm:left-8 z-50 pointer-events-auto">
                 <LogoMotion />
@@ -192,7 +192,7 @@ export default function ContactPage() {
 
             {/* RIGHT FIXED MENU */}
             <div className="hidden lg:block pointer-events-auto fixed right-6 top-1/2 -translate-y-1/2 z-50">
-                <div className="rounded-3xl border border-white/15 bg-black/40 backdrop-blur px-4 py-4 flex flex-col items-center gap-6 max-h-[80vh]">
+                <div className="border border-white/30 shadow-[0_0_25px_rgba(255,255,255,0.4)] bg-black/40 backdrop-blur px-4 py-4 flex flex-col items-center gap-6 max-h-[80vh]">
                     {[
                         { label: "ABOUT", to: "/about" },
                         { label: "CERTIFICATIONS", to: "/certifications" },
@@ -202,17 +202,35 @@ export default function ContactPage() {
                             key={item.label}
                             to={item.to}
                             className="
+                text-[14px]
                 cursor-target select-none
                 opacity-70 hover:opacity-100
                 transition hover:scale-110
-                [writing-mode:vertical-rl] rotate-180
-                tracking-[0.18em] text-[13px]
+                [writing-mode:vertical-rl] rotate-0
+                tracking-[0.18em]
               "
                         >
                             {item.label}
                         </Link>
                     ))}
                 </div>
+            </div>
+
+            {/* MOBILE BOTTOM NAV */}
+            <div className="lg:hidden pointer-events-auto fixed left-1/2 -translate-x-1/2 bottom-[env(safe-area-inset-bottom)] mb-3 z-50 rounded-2xl border border-white/15 bg-black/50 backdrop-blur px-3 py-2 flex gap-2">
+                {[
+                    { label: "ABOUT", to: "/about" },
+                    { label: "CERTIFICATIONS", to: "/certifications" },
+                    { label: "CONTACT", to: "/contact" },
+                ].map((item) => (
+                    <Link
+                        key={item.label}
+                        to={item.to}
+                        className="cursor-target text-xs sm:text-sm tracking-widest px-3 py-2 rounded-xl opacity-80 hover:opacity-100 hover:bg-white/10 transition"
+                    >
+                        {item.label}
+                    </Link>
+                ))}
             </div>
         </div>
     );

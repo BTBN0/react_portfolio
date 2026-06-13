@@ -1,9 +1,20 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import LogoMotion from "../components/ui/LogoMotion";
+import { listCertifications, listProjects } from "../lib/content";
 
 export default function CertificationsPage() {
+  const [certs, setCerts] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const [previewImg, setPreviewImg] = useState(null);
+
+  useEffect(() => {
+    listCertifications().then(setCerts);
+    listProjects().then(setProjects);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-black/60 text-white overflow-x-hidden">
+    <div className="min-h-screen bg-black/60 text-white overflow-x-hidden pb-20 lg:pb-0">
       <div className="fixed top-4 left-4 sm:top-6 sm:left-8 z-50 pointer-events-auto">
         <LogoMotion />
       </div>
@@ -32,7 +43,25 @@ export default function CertificationsPage() {
             Certifications
           </h2>
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {/* Add certification cards here */}
+            {certs.map((cert) => (
+              <div
+                key={cert.id}
+                className="cursor-target border-[3px] border-white/50 bg-black/40 p-5 transition hover:border-white hover:bg-black/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-white/20"
+              >
+                {cert.imageUrl && (
+                  <img
+                    src={cert.imageUrl}
+                    alt={cert.name}
+                    onClick={() => setPreviewImg(cert.imageUrl)}
+                    className="cursor-target w-full h-auto object-contain mb-4 cursor-pointer"
+                  />
+                )}
+                <h3 className="font-semibold text-lg">{cert.name}</h3>
+                {cert.bio && (
+                  <p className="mt-2 text-sm text-white/60">{cert.bio}</p>
+                )}
+              </div>
+            ))}
           </div>
         </div>
 
@@ -42,7 +71,35 @@ export default function CertificationsPage() {
             Projects
           </h2>
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {/* Add project cards here */}
+            {projects.map((project) => (
+              <div
+                key={project.id}
+                className="cursor-target border-[3px] border-white/50 bg-black/40 p-5 transition hover:border-white hover:bg-black/60 hover:-translate-y-1 hover:shadow-lg hover:shadow-white/20"
+              >
+                {project.imageUrl && (
+                  <img
+                    src={project.imageUrl}
+                    alt={project.name}
+                    onClick={() => setPreviewImg(project.imageUrl)}
+                    className="cursor-target w-full h-auto object-contain mb-4 cursor-pointer"
+                  />
+                )}
+                <h3 className="font-semibold text-lg">{project.name}</h3>
+                {project.bio && (
+                  <p className="mt-2 text-sm text-white/60">{project.bio}</p>
+                )}
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-2 inline-block text-sm text-blue-400 hover:text-blue-300 break-all"
+                  >
+                    {project.link}
+                  </a>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -126,7 +183,7 @@ export default function CertificationsPage() {
 
       {/* RIGHT FIXED MENU */}
       <div className="hidden lg:block pointer-events-auto fixed right-6 top-1/2 -translate-y-1/2 z-50">
-        <div className="rounded-3xl border border-white/15 bg-black/40 backdrop-blur px-4 py-4 flex flex-col items-center gap-6 max-h-[80vh]">
+        <div className="border border-white/30 shadow-[0_0_25px_rgba(255,255,255,0.4)] bg-black/40 backdrop-blur px-4 py-4 flex flex-col items-center gap-6 max-h-[80vh]">
           {[
             { label: "ABOUT", to: "/about" },
             { label: "CERTIFICATIONS", to: "/certifications" },
@@ -136,11 +193,12 @@ export default function CertificationsPage() {
               key={item.label}
               to={item.to}
               className="
+                text-[14px]
                 cursor-target select-none
                 opacity-70 hover:opacity-100
                 transition hover:scale-110
-                [writing-mode:vertical-rl] rotate-180
-                tracking-[0.18em] text-[13px]
+                [writing-mode:vertical-rl] rotate-0
+                tracking-[0.18em]
               "
             >
               {item.label}
@@ -148,6 +206,44 @@ export default function CertificationsPage() {
           ))}
         </div>
       </div>
+
+      {/* MOBILE BOTTOM NAV */}
+      <div className="lg:hidden pointer-events-auto fixed left-1/2 -translate-x-1/2 bottom-[env(safe-area-inset-bottom)] mb-3 z-50 rounded-2xl border border-white/15 bg-black/50 backdrop-blur px-3 py-2 flex gap-2">
+        {[
+          { label: "ABOUT", to: "/about" },
+          { label: "CERTIFICATIONS", to: "/certifications" },
+          { label: "CONTACT", to: "/contact" },
+        ].map((item) => (
+          <Link
+            key={item.label}
+            to={item.to}
+            className="cursor-target text-xs sm:text-sm tracking-widest px-3 py-2 rounded-xl opacity-80 hover:opacity-100 hover:bg-white/10 transition"
+          >
+            {item.label}
+          </Link>
+        ))}
+      </div>
+
+      {/* IMAGE PREVIEW MODAL */}
+      {previewImg && (
+        <div
+          className="cursor-target fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-6"
+          onClick={() => setPreviewImg(null)}
+        >
+          <img
+            src={previewImg}
+            alt="Preview"
+            className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg"
+          />
+          <button
+            onClick={() => setPreviewImg(null)}
+            aria-label="Close"
+            className="cursor-target absolute top-4 right-4 sm:top-6 sm:right-6 flex items-center justify-center w-10 h-10 rounded-full bg-white/10 text-white text-2xl hover:bg-white/20 transition"
+          >
+            ×
+          </button>
+        </div>
+      )}
     </div>
   );
 }
