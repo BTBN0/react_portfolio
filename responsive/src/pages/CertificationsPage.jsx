@@ -126,7 +126,7 @@ export default function CertificationsPage() {
 
       {/* RIGHT FIXED MENU */}
       <div className="hidden lg:block pointer-events-auto fixed right-6 top-1/2 -translate-y-1/2 z-50">
-        <div className="rounded-3xl border border-white/15 bg-black/40 backdrop-blur px-4 py-4 flex flex-col items-center gap-8">
+        <div className="rounded-3xl border border-white/15 bg-black/40 backdrop-blur px-4 py-4 flex flex-col items-center gap-6 max-h-[80vh]">
           {[
             { label: "ABOUT", to: "/about" },
             { label: "CERTIFICATIONS", to: "/certifications" },
@@ -140,7 +140,7 @@ export default function CertificationsPage() {
                 opacity-70 hover:opacity-100
                 transition hover:scale-110
                 [writing-mode:vertical-rl] rotate-180
-                tracking-widest text-sm
+                tracking-[0.18em] text-[13px]
               "
             >
               {item.label}

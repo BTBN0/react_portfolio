@@ -101,19 +101,20 @@ export default function Overlay() {
        border border-white/30 shadow-[0_0_25px_rgba(255,255,255,0.4)]
       bg-black/40 backdrop-blur
       px-4 py-4
-      flex flex-col items-center gap-8 
+      flex flex-col items-center gap-6
+      max-h-[80vh]
     "
                 >
                     {menu.map((item) => (
                         <button
                             key={item.label}
                             onClick={() => handleMenuClick(item)}
-                            className="text-[16px]
+                            className="text-[14px]
           cursor-target select-none
           opacity-70 hover:opacity-100
           transition hover:scale-110
           [writing-mode:vertical-rl] rotate-0
-          tracking-widest
+          tracking-[0.18em]
         "
                         >
 
