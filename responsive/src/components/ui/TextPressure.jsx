@@ -242,6 +242,9 @@ const TextPressure = ({
                         ref={(el) => (spansRef.current[i] = el)}
                         data-char={char}
                         className="inline-block"
+                        style={{
+                            fontVariationSettings: "'wght' 400, 'wdth' 100, 'ital' 0",
+                        }}
                     >
                         {char}
                     </span>
