@@ -9,7 +9,7 @@ export default function Overlay() {
     const menu = [
         { label: "ABOUT", type: "page", to: "/about" },        // page
         { label: "PHOTOS", type: "section", id: "photos" },    // section
-        { label: "SKILLS", type: "section", id: "skills" },    // section
+        { label: "CERTIFICATIONS", type: "page", to: "/certifications" }, // page
         { label: "CONTACT", type: "page", to: "/contact" },    // ✅ page
     ];
 
